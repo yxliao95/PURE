@@ -30,7 +30,7 @@ class BertForEntity(BertPreTrainedModel):
             FeedForward(input_dim=config.hidden_size*2+width_embedding_dim, 
                         num_layers=2,
                         hidden_dims=head_hidden_dim,
-                        activations=F.relu,
+                        activations=nn.ReLU(),
                         dropout=0.2),
             nn.Linear(head_hidden_dim, num_ner_labels)
         )
@@ -97,7 +97,7 @@ class AlbertForEntity(AlbertPreTrainedModel):
             FeedForward(input_dim=config.hidden_size*2+width_embedding_dim, 
                         num_layers=2,
                         hidden_dims=head_hidden_dim,
-                        activations=F.relu,
+                        activations=nn.ReLU(),
                         dropout=0.2),
             nn.Linear(head_hidden_dim, num_ner_labels)
         )
@@ -168,10 +168,10 @@ class EntityModel():
 
         if args.use_albert:
             self.tokenizer = AlbertTokenizer.from_pretrained(vocab_name)
-            self.bert_model = AlbertForEntity.from_pretrained(bert_model_name, num_ner_labels=num_ner_labels, max_span_length=args.max_span_length)
+            self.bert_model = AlbertForEntity.from_pretrained(bert_model_name, num_ner_labels=num_ner_labels, max_span_length=args.max_span_length, return_dict=False)
         else:
             self.tokenizer = BertTokenizer.from_pretrained(vocab_name)
-            self.bert_model = BertForEntity.from_pretrained(bert_model_name, num_ner_labels=num_ner_labels, max_span_length=args.max_span_length)
+            self.bert_model = BertForEntity.from_pretrained(bert_model_name, num_ner_labels=num_ner_labels, max_span_length=args.max_span_length, return_dict=False)
 
         self._model_device = 'cpu'
         self.move_model_to_cuda()
