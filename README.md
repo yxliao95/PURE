@@ -75,9 +75,9 @@ cd ..
 
 # Run the pre-trained entity model, the result will be stored in ${scierc_ent_model}/ent_pred_test.json
 HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
-python run_entity.py \
+python PURE/run_entity.py \
     --do_eval --eval_test \
-    --context_window 0 \
+    --context_window 300 \
     --task scierc \
     --data_dir /root/workspace/data/scierc_data/processed_data/json \
     --bert_model_dir /root/workspace/hf_offline_models/scibert_scivocab_uncased \
