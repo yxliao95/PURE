@@ -218,7 +218,7 @@ class EntityModel:
             )
 
         self._model_device = "cpu"
-        # self.move_model_to_cuda()
+        self.move_model_to_cuda()
 
     def move_model_to_cuda(self):
         if not torch.cuda.is_available():

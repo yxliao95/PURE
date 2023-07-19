@@ -74,13 +74,14 @@ scierc_rel_model_approx=scierc_models/rel_approx-scib-ctx0/
 cd ..
 
 # Run the pre-trained entity model, the result will be stored in ${scierc_ent_model}/ent_pred_test.json
+HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
 python run_entity.py \
     --do_eval --eval_test \
     --context_window 0 \
     --task scierc \
-    --data_dir ${scierc_dataset} \
-    --model allenai/scibert_scivocab_uncased \
-    --output_dir ${scierc_ent_model}
+    --data_dir /root/workspace/data/scierc_data/processed_data/json \
+    --bert_model_dir /root/workspace/hf_offline_models/scibert_scivocab_uncased \
+    --output_dir /root/workspace/PURE/models/ent-scib-ctx0
 
 # Run the pre-trained full relation model
 python run_relation.py \
